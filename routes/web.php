@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+
+//Route::get('dashboard', function () {
+//    return view('dashboard');
+//});
+
+Auth::routes();
+
+Route::group(['middleware' => ['web', 'auth']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 });
