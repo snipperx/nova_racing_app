@@ -16,7 +16,7 @@
 @include('layouts.partials.footer')
 </div><!-- am-mainpanel -->
 <!-- Include JavaScript files -->
-<script src="{{ asset('js/global.js') }}"></script>
+{{--<script src="{{ asset('js/global.js') }}"></script>--}}
 
 @include('layouts.partials.scripts')
 

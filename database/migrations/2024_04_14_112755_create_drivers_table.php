@@ -14,9 +14,12 @@ return new class extends Migration {
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->unsignedBigInteger('team_id');
             $table->string('name');
             $table->date('date_of_birth');
+            $table->string('image')->nullable();
+
             $table->boolean('is_active')->default(true);
             $table->foreign('team_id')
                 ->references('id')

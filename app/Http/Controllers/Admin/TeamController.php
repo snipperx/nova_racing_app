@@ -3,11 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Team;
+use App\Services\EventService;
+use App\Services\TeamService;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
+
+    private TeamService $teamService;
+    private EventService $eventService;
+
+    public function __construct(
+        TeamService $teamService,
+        EventService $eventService
+    )
+    {
+        $this->teamService = $teamService;
+        $this->eventService = $eventService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +31,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = $this->teamService->listTeam();
+        return view('team.index', compact('teams'));
     }
 
     /**
@@ -25,18 +42,25 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        $events = $this->eventService->list();
+        return view('team.create', compact('events'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $validator = validator($request->all(), [
+            'name' => 'required',
+            'event_id' => 'required',
+            'nationality' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+
+        $event = $this->teamService->storeTeamDetails((array)$request->all());
+        return response()->json(['message' => 'success'], 200);
     }
 
     /**
@@ -50,37 +74,35 @@ class TeamController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Team  $teams
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Team $teams)
+
+    public function edit($id)
     {
-        //
+        $events = $this->eventService->list();
+        $teams = $this->teamService->findTeam($id);
+        return view('team.edit', compact('teams', 'events'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Team  $teams
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Team $teams)
+
+    public function update(Request $request, $id)
     {
-        //
+        $validator = validator($request->all(), [
+            'name' => 'required',
+            'event_id' => 'required',
+            'nationality' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $this->teamService->updateTeamDetails($id, $request->all());
+        return response()->json(['message' => 'success'], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Team  $teams
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Team $teams)
+
+    public function destroy($id)
     {
-        //
+        $this->teamService->destroyTeam($id);
+        return redirect()->route('teams.index');
     }
 }

@@ -14,11 +14,13 @@ return new class extends Migration {
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->unsignedBigInteger('race_details_id');
             $table->unsignedBigInteger('team_id');
             $table->unsignedBigInteger('driver_id');
-            $table->integer('podium_position');
+            $table->integer('podium_position')->unique();
             $table->time('race_time');
+
 
             $table->foreign('race_details_id')
                 ->references('id')

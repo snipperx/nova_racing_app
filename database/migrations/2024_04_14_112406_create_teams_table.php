@@ -14,10 +14,12 @@ return new class extends Migration {
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id');
+            $table->string('uuid')->unique();
             $table->string('name');
             $table->string('nationality');
             $table->boolean('is_active')->default(true);
+            $table->unsignedBigInteger('event_id');
+
             $table->foreign('event_id')
                 ->references('id')
                 ->on('events')

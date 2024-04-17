@@ -14,6 +14,7 @@ return new class extends Migration {
     {
         Schema::create('qualifying_sessions', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->unsignedBigInteger('race_details_id');
             $table->unsignedBigInteger('team_id');
             $table->unsignedBigInteger('driver_id');
