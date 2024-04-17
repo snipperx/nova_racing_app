@@ -17,12 +17,12 @@
     <div class="tab-content">
         <div id="mainMenu" class="tab-pane active">
             <ul class="nav am-sideleft-menu">
-                <li class="nav-item">
-                    <a href="{{ route('home') }}" class="nav-link active">
-                        <i class="icon ion-ios-home-outline"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li><!-- nav-item -->
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{ route('home') }}" class="nav-link active">--}}
+{{--                        <i class="icon ion-ios-home-outline"></i>--}}
+{{--                        <span>Dashboard</span>--}}
+{{--                    </a>--}}
+{{--                </li><!-- nav-item -->--}}
                 <li class="nav-item">
                     <a href="{{ route('events.index') }}" class="nav-link">
                         <i class="icon ion-help-buoy"></i>

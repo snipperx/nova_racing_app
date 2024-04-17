@@ -15,11 +15,7 @@
             </a>
             <div class="dropdown-menu wd-200">
                 <ul class="list-unstyled user-profile-nav">
-                    <li><a href=""><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
-                    <li><a href=""><i class="icon ion-ios-gear-outline"></i> Settings</a></li>
-                    <li><a href=""><i class="icon ion-ios-download-outline"></i> Downloads</a></li>
-                    <li><a href=""><i class="icon ion-ios-star-outline"></i> Favorites</a></li>
-                    <li><a href=""><i class="icon ion-ios-folder-outline"></i> Collections</a></li>
+
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

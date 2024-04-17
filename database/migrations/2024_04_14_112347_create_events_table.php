@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
 
             $table->unsignedBigInteger('circuit_id');
+
             $table->foreign('circuit_id')
                 ->references('id')
                 ->on('circuits')

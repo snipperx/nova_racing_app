@@ -16,7 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-
         $users = [
             [
                 'name' => 'Nkosana',
